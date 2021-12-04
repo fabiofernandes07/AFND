@@ -1,5 +1,5 @@
 import sys
-from automato import pegarValor, Automato, pegarValorDic
+from automato import pegarValorDic, Automato, pegarValorDic
 
 
 arquivo = open('automato.txt', "r")
@@ -14,8 +14,8 @@ transicoes = {}
 getDic = []
 AFN = Automato()
 
-AFN.alfabeto = pegarValor(lista[0])
-AFN.estados = pegarValor(lista[1])
+AFN.alfabeto = pegarValorDic(lista[0])
+AFN.estados = pegarValorDic(lista[1])
 
 
 
