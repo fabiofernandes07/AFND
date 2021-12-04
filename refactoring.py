@@ -11,7 +11,7 @@ class state:
         self.stateNext = nextstate
 
     def get_statePrevious(self):
-        return self.anteriorEstado
+        return self.statePrevious
     
     def set_statePrevious(self, previous):
         self.statePrevious = previous
