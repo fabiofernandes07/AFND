@@ -1,3 +1,26 @@
+def getList(valor):
+    count1 = 0
+    valorf = []
+    for j in valor.split("="):
+        count1 += 1
+        if (count1 == 2):
+            for i in j.split(","):
+                valorf.append(i)
+    return valorf
+
+
+def pegarValorDic(valor):
+    valorf = []
+    for i in valor.split(","):
+        valorf.append(i)
+    return valorf
+
+def setDicionarioVazio(states):
+    transicoes = {}
+    for i in states :
+        print(i)
+
+
 class state:
     def __init__(self):
         self.name = None
@@ -35,16 +58,16 @@ class Automaton:
         return v
 
     def set_alphabet(self, alfa):
-        self.alfa = self.repeatVerify(alfa)
+        self.alphabet = self.repeatVerify(alfa)
 
     def set_states(self, state):
-        self.state = self.repeatVerify(state)
-        self.state.sort()
+        self.states = self.repeatVerify(state)
+        self.states.sort()
         self.alphabet.append("block")
     
     def set_initState(self, state):
         if state in self.states:
-            self.initState = state
+            self.primaryState = state
         else:
             print("Error: Invalid State")
     
@@ -85,7 +108,7 @@ class Automaton:
     def set_transitions(self, transitions):
         #Se passar no teste de verificação atribui essa transição -> transições
         if(self.verifyTransitions(transitions) == True):
-            self.transitions = transitions
+            self.transition = transitions
         else:
             print("No return AFND: Default")
 
@@ -148,20 +171,20 @@ class Automaton:
         switch = False
         initDic = None
         endedDic = None
-        for j in range(len(self.transitions[actState]["block"])):
+        for j in range(len(self.transition[actState]["block"])):
             newState = state()
-            newState.name = self.transitions[actState]["block"][j]
-            if(j == len(self.transitions[actState]["block"])):
+            newState.name = self.transition[actState]["block"][j]
+            if(j == len(self.transition[actState]["block"])):
                 switch = True
-            while(self.transitions[newState.name]["block"] != []):
+            while(self.transition[newState.name]["block"] != []):
                 checkState = newState.name
-                for j in range(len(self.transitions[newState.name]["block"])):
+                for j in range(len(self.transition[newState.name]["block"])):
                     if(j>0):
                         newEstado = state()
-                        newEstado.name = self.transitions[checkState]["block"][j]
+                        newEstado.name = self.transition[checkState]["block"][j]
                         initDic, endedDic = self.orgBlock(newEstado,initDic,endedDic)
                     else:
-                        newState.name = self.transitions[newState.name]["block"][j]
+                        newState.name = self.transition[newState.name]["block"][j]
                         #print de um novo estado incluso no construtor state
                         initDic, endedDic = self.orgBlock(newState,initDic,endedDic)
                     self.lenghtState += 1
@@ -176,10 +199,10 @@ class Automaton:
         endAUX = None
         states = actState.name
 
-        for j in range(len(self.transicoes[states][inc])):
+        for j in range(len(self.transition[states][inc])):
             if(j == 0):
 
-                actState.name = self.transicoes[states][inc][j]
+                actState.name = self.transition[states][inc][j]
                 #variaveis de abertura de cada linha com transições incluindo o Block
                 initBlock, endedBlock = self.tranBlock(actState.name) 
                 if((startAUX and endAUX) == None):
@@ -192,8 +215,8 @@ class Automaton:
                     endAUX =endedBlock
             else:
                 newState = state()
-                newState.name = self.transitions[states][inc][j]
-                initBlock, endedBlock = self.transicao_epsilon(newState.name)
+                newState.name = self.transition[states][inc][j]
+                initBlock, endedBlock = self.tranBlock(newState.name)
                 if((startAUX and endAUX) == None):
                     startAUX = newState
                     endAUX = newState
@@ -207,7 +230,7 @@ class Automaton:
                     endAUX =endedBlock
 
                 self.lenghtState += 1
-        if(len(self.transitions[states][inc]) == 0):
+        if(len(self.transition[states][inc]) == 0):
             self.entryNoFound(actState)
         return startAUX, endAUX
 

@@ -8,7 +8,11 @@ def pegarValor(valor):
                 valorf.append(i)
     return valorf
 
-
+def pegarValorDic(valor):
+    valorf = []
+    for i in valor.split(","):
+        valorf.append(i)
+    return valorf
 
 
 class state:
