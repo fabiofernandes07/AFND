@@ -1,6 +1,7 @@
 from os import stat
 
 
+
 def getList(value):
     countO = 0
     valueF = []
