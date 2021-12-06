@@ -1,5 +1,6 @@
 import sys
 
+
 from refactoring import Automaton, getValueDic,  getList, setDicEmpty
 
 
