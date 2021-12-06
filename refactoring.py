@@ -1,27 +1,29 @@
 from os import stat
 
 
-def getList(valor):
-    count1 = 0
-    valorf = []
-    for j in valor.split("="):
-        count1 += 1
-        if (count1 == 2):
+def getList(value):
+    countO = 0
+    valueF = []
+    for j in value.split("="):
+        countO += 1
+        if (countO == 2):
             for i in j.split(","):
-                valorf.append(i)
-    return valorf
+                valueF.append(i)
+    return valueF
 
 
-def pegarValorDic(valor):
-    valorf = []
-    for i in valor.split(","):
-        valorf.append(i)
-    return valorf
+def getValueDic(value):
+    valueF = []
+    for j in value.split(","):
+        valueF.append(j)
+    return valueF
 
-def setDicionarioVazio(states):
-    transicoes = {}
-    for i in states :
-        print(i)
+
+def setDicEmpty(states):
+    transitions = {}
+    for j in states :
+        print(j)
+
 
 
 class state:
