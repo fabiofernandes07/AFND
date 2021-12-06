@@ -1,3 +1,6 @@
+from os import stat
+
+
 def getList(valor):
     count1 = 0
     valorf = []
@@ -67,7 +70,7 @@ class Automaton:
     
     def set_initState(self, state):
         if state in self.states:
-            self.primaryState = state
+           self.initState = state
         else:
             print("Error: Invalid State")
     
@@ -83,21 +86,26 @@ class Automaton:
     def verifyTransitions(self, transitions):
         statesTransitions = []
         for state in transitions:
+
             boxState = []; statesTransitions.append(state)
             if(state not in boxState and state in self.states):
                 boxState.append(state); boxAlpha = []
                 for prohi in transitions[state]:
                     boxAlpha.append(prohi)
                     if(prohi in self.alphabet):
-                        for i in transitions[state][prohi]:
+                        for i in transitions[state][prohi]:     
                             if(i not in self.states):
+                                
                                 return False
                     else:
-                        return False  
+                          
+                        return False
                 boxAlpha.sort()
-                if(boxAlpha != self.alphabet):
-                    return False           
+                self.alphabet.sort()
+                if(boxAlpha != self.alphabet):          
+                    return False
             else:
+                
                 return False
         
         statesTransitions.sort()
@@ -113,7 +121,6 @@ class Automaton:
             print("No return AFND: Default")
 
     def linkTransitions(self, inc):
-        
         state = self.primaryState
         startAUX = None
         endAUX = None
@@ -268,7 +275,7 @@ class Automaton:
         for inc in string:
             self.linkTransitions(inc)
         
-        actState = self.primeiro_estado
+        actState = self.primaryState
 
         if(actState != None):
             while(actState.get_stateNext() != None):
