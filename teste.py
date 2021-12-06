@@ -1,6 +1,6 @@
 import sys
 
-from refactoring import Automaton, pegarValorDic,  getList, setDicionarioVazio
+from refactoring import Automaton, getValueDic,  getList, setDicEmpty
 
 
 arquivo = open('automato.txt', "r")
@@ -39,7 +39,7 @@ for i in lista:
         break
     if cap == True:
         
-        getDic = pegarValorDic(i)
+        getDic = getValueDic(i)
 
         if getDic[0] in transicoes : 
             transicoes[getDic[0]].update({getDic[2]: [getDic[1]]})
